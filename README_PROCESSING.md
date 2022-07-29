@@ -29,9 +29,34 @@ Vector2 position = rigidbody.position;
 ```
 - fixedDeltaTime là thời gian cố định giữa các frame trong game. thường default là 0.02s. (Setup ở trong Player > Time.)
 
-- File AnimatedSpriteRenderer để thực hiện di chuyển animation của các sprites. 
+- File AnimatedSpriteRenderer để thực hiện di chuyển animation của các sprites. (Có thể thay thế bằng cách sử dụng animation và animator controller. )
 InvokeRepeating để thực hiện lặp lại 1 hàm nào đó sau 1 khoảng thời gian. (Tìm hiểu thêm về Coroutine và Invoke https://phuongne.com/coroutine-invoke/) Invoked ko bị dừng khi enabled = false.
 Invoke dùng sẽ tốt hơn, tối ưu hơn và đảm bảo FPS hơn sử dụng Coroutine WaitForSeconds.
 - Khi mà đang ko ở trạng thái Idle, ta sẽ cho thực hiện việc hiển thị các sprite ở trong array tạo thành animation (Ở đây animationTime là 1/6 => 1 giây chạy 6 lần hoạt ảnh)
 - Ở trong file Movement.cs : Ta thực hiện enabled spriteRender tương ứng khi user di chuyển nhận vật theo hướng nào đó. trong hàm SetDirection().
+
+### Bomb Controller : 
+- Thêm script BombController.cs vào trong Player để quản lý các bomb của player. 
+- Setup số lượng, thời gian destroy bomb và collider2D cho bomb.
+- Lưu ý : Trong Collider nếu để isTrigger true thì sẽ ko có tác động vật lý (VD: Player đâm vào bom sẽ đi xuyên qua chứ ko đẩy quả bom đó). 
+- Muốn Player đẩy được bomb ta thì trong collider2D set isTrigger = true và trong BombController bắt event : Sau khi Player đi ra khỏi quả bom vừa sinh ra thì sẽ tắt isTrigger, cho phép tương tác vật lý.
+```c# 
+private void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.layer == LayerMask.NameToLayer("bomb")){
+            other.isTrigger = false; 
+        }
+    }
+```
+
+### Explosion : 
+- Tạo GameObject có collider2D set isTrigger = true. bên trong tạo 3 SpirteRenderer chứa animatedSpriteRenderer của 3 state Start, Middle và End.
+- Trong BombController, khi Destroy Bomb thì cho sinh ra Explosion tại ví trí quả bom.
+
+### Cơ bản đã đủ kiến thức, tương tự với những phần khác như Item.
+- Tạo GameManager.cs (Singleton) để quản lý điểm số, số lượng Player trong game, Các tính năng như Pause, Restart, ...v..v..
+
+
+### Lưu ý : 
+- Để 2 Player có thể đi xuyên qua nhau mà ko có collider -> Vào Project Settings > Physics2D > Layer Collision Matrix và bỏ tích chọn giữa Player với Player.
+
 
