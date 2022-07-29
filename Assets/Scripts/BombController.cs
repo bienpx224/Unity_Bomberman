@@ -38,10 +38,10 @@ public class BombController : MonoBehaviour
     private IEnumerator PlaceBomb()
     {
         Vector2 position = transform.position;
-        Debug.Log(position);
+        
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
-        Debug.Log(position);
+
         GameObject bomb = Instantiate(bombPrefabs, position, Quaternion.identity);
         bombsRemaining--;
 
@@ -79,7 +79,6 @@ public class BombController : MonoBehaviour
     {
         if (length <= 0)
         {
-            Debug.Log(string.Format("Da tai diem cuoi: {0} - Direction: {1}", position, direction));
             return;
         }
 
@@ -88,7 +87,6 @@ public class BombController : MonoBehaviour
         /* Check xem vị trí vụ nổ đang ở trên LayerMask thì ko hiển thị */
         if(Physics2D.OverlapBox(position, Vector2.one / 2f, 0f, explosionLayerMask)){
             ClearDestructible(position);
-            Debug.Log(string.Format("Da cham layer: {0} - Direction: {1}", position, direction));
             return;
         }
 

@@ -28,6 +28,7 @@ public class ItemPickup : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other){
         /* Check if Player Tag collides with ItemPickup */
+        Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
         if(other.CompareTag("Player")){
             OnItemPickup(other.gameObject);
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 667430672196796530}
   - component: {fileID: 667430672196796529}
   - component: {fileID: 667430672196796528}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1508697743
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1615810300593537487, guid: 04de33a67ba00214b84817677eab986e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 667430672358811579}
   - component: {fileID: 667430672358811583}
   - component: {fileID: 667430672358811582}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: PlayerRed
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 667430672708592235}
   - component: {fileID: 667430672708592234}
   - component: {fileID: 667430672708592233}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1508697743
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1615810300593537487, guid: 04de33a67ba00214b84817677eab986e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 667430673283793270}
   - component: {fileID: 667430673283793269}
   - component: {fileID: 667430673283793268}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1508697743
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 4256812030753675766, guid: 04de33a67ba00214b84817677eab986e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 667430673828175612}
   - component: {fileID: 667430673828175603}
   - component: {fileID: 667430673828175602}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1508697743
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3397826146003677641, guid: 04de33a67ba00214b84817677eab986e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 667430673949265708}
   - component: {fileID: 667430673949265698}
   - component: {fileID: 667430673949265699}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1508697743
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -4694725717360533878, guid: 8dc4bdce2aab4b4479a5a9125129a18e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
