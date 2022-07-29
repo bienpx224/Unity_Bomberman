@@ -59,4 +59,8 @@ private void OnTriggerExit2D(Collider2D other){
 ### Lưu ý : 
 - Để 2 Player có thể đi xuyên qua nhau mà ko có collider -> Vào Project Settings > Physics2D > Layer Collision Matrix và bỏ tích chọn giữa Player với Player.
 
+- Cần chỉnh Sorting Layer ở trong Sprite Renderer. (thường sẽ có ở những component Renderer) để hiển thị đúng các layer trong game. Tốt nhất nên tạo các Sorting Layer cho từng lớp đối tượng.
+
+- Để chỉnh cho Canvas trùng khớp vào Camera luôn : Ta thêm Component Canvas Scaler vào trong Canvas. 
+Chọn UI Scale Mode là Scale With Screen Size, nhập size target vào (ở đây là 2436x1125), ở mục Canvas bên trên thì chọn Render Mode là Screen Space - Camera. -> Done.
 

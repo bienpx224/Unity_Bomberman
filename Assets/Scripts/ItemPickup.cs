@@ -31,5 +31,8 @@ public class ItemPickup : MonoBehaviour
         if(other.CompareTag("Player")){
             OnItemPickup(other.gameObject);
         }
+        if(other.gameObject.layer == LayerMask.NameToLayer("Explosion")){
+            Destroy(gameObject);
+        }
     }
 }

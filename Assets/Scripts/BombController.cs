@@ -79,6 +79,7 @@ public class BombController : MonoBehaviour
     {
         if (length <= 0)
         {
+            Debug.Log(string.Format("Da tai diem cuoi: {0} - Direction: {1}", position, direction));
             return;
         }
 
@@ -87,10 +88,8 @@ public class BombController : MonoBehaviour
         /* Check xem vị trí vụ nổ đang ở trên LayerMask thì ko hiển thị */
         if(Physics2D.OverlapBox(position, Vector2.one / 2f, 0f, explosionLayerMask)){
             ClearDestructible(position);
+            Debug.Log(string.Format("Da cham layer: {0} - Direction: {1}", position, direction));
             return;
-        }
-        if(Physics2D.OverlapBox(position, Vector2.one / 2f, 0f, explosionLayerMask)){
-             
         }
 
         Explosion explosion = Instantiate(explosionPrefab, position, Quaternion.identity);

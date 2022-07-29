@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Stage
   - Water
   - UI
-  - Stage
+  - 
   - Bomb
   - Explosion
   - Item
-  - 
+  - Player
   - 
   - 
   - 
@@ -40,6 +40,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Stage
+    uniqueID: 3793277801
+    locked: 0
+  - name: Bomb
+    uniqueID: 1396420861
+    locked: 0
+  - name: Explosion
+    uniqueID: 3320463159
+    locked: 0
+  - name: Item
+    uniqueID: 906558867
     locked: 0
   - name: Player
     uniqueID: 2786269553
