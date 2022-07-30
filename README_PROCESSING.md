@@ -55,6 +55,13 @@ private void OnTriggerExit2D(Collider2D other){
 ### Cơ bản đã đủ kiến thức, tương tự với những phần khác như Item.
 - Tạo GameManager.cs (Singleton) để quản lý điểm số, số lượng Player trong game, Các tính năng như Pause, Restart, ...v..v..
 
+### Leanpool : 
+- Package manager : Search Leanpool và import tất cả về. có thể bỏ example cho đỡ nặng.
+- Sau đó với những prefabs nào mình Instantiate nhiều thì sử dụng Pool.
+    + Ở đầu file import thêm : using Lean.Pool;
+    + Spawn a object :  Lean.Pool.LeanPool.Spawn(bombPrefabs, position, Quaternion.identity);
+    + Destroy a object :  Lean.Pool.LeanPool.Despawn(bombPrefabs, position, Quaternion.identity);
+
 
 ### Lưu ý : 
 - Để 2 Player có thể đi xuyên qua nhau mà ko có collider -> Vào Project Settings > Physics2D > Layer Collision Matrix và bỏ tích chọn giữa Player với Player.

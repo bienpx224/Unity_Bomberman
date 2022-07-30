@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Lean.Pool;
 
 public class BombController : MonoBehaviour
 {
@@ -38,22 +39,24 @@ public class BombController : MonoBehaviour
     private IEnumerator PlaceBomb()
     {
         Vector2 position = transform.position;
-        
+
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
-        GameObject bomb = Instantiate(bombPrefabs, position, Quaternion.identity);
+        Debug.Log(position);
+
+        GameObject bomb = Lean.Pool.LeanPool.Spawn(bombPrefabs, position, Quaternion.identity);
         bombsRemaining--;
 
         yield return new WaitForSeconds(bombFuseTime);
 
         // End bombFuseTime, make a explosion effect
-        position = bomb.transform.position;  // Get new position of the bomb to create explosion effect
+        position = bomb.transform.position;  // Get newBomb position of the bomb to create explosion effect
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
 
         /* Make the explosion in the center, at position of the bomb */
-        Explosion explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
+        Explosion explosion = Lean.Pool.LeanPool.Spawn(explosionPrefab, position, Quaternion.identity);
         explosion.SetActiveRenderer(explosion.start);
         explosion.DestroyAfter(explosionDuration);
 
@@ -63,7 +66,7 @@ public class BombController : MonoBehaviour
         Explode(position, Vector2.left, explosionRadius);
         Explode(position, Vector2.right, explosionRadius);
 
-        Destroy(bomb);
+        Lean.Pool.LeanPool.Despawn(bomb);
         bombsRemaining++;
     }
 
@@ -71,7 +74,8 @@ public class BombController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Bomb"))
         {
-            other.isTrigger = false;
+            Debug.Log("OnTriggerExit2D of Bomb");
+            other.isTrigger = false;   // Cho phép tương tác vật lý giữa Player và bom 
         }
     }
 
@@ -90,7 +94,7 @@ public class BombController : MonoBehaviour
             return;
         }
 
-        Explosion explosion = Instantiate(explosionPrefab, position, Quaternion.identity);
+        Explosion  explosion = Lean.Pool.LeanPool.Spawn(explosionPrefab, position,Quaternion.identity);
         explosion.SetActiveRenderer(length > 1 ? explosion.middle : explosion.end);
         explosion.SetDirection(direction); /* Set Rotation for explosion rotate to direction : Cho vụ nổ quay đúng hướng */
         explosion.DestroyAfter(explosionDuration);
@@ -103,7 +107,7 @@ public class BombController : MonoBehaviour
         TileBase tile = destructibleTiles.GetTile(cell); // Get this tile at position
 
         if(tile != null){
-            Instantiate(destructiblePrefab, position, Quaternion.identity);
+            Lean.Pool.LeanPool.Spawn(destructiblePrefab, position, Quaternion.identity);
             destructibleTiles.SetTile(cell, null);   // Remove this tile from destructibleTiles. 
         }
         

@@ -24,16 +24,16 @@ public class ItemPickup : MonoBehaviour
             break;
         }
 
-        Destroy(gameObject);
+        Lean.Pool.LeanPool.Despawn(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other){
         /* Check if Player Tag collides with ItemPickup */
-        Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
+        // Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
         if(other.CompareTag("Player")){
             OnItemPickup(other.gameObject);
         }
         if(other.gameObject.layer == LayerMask.NameToLayer("Explosion")){
-            Destroy(gameObject);
+            Lean.Pool.LeanPool.Despawn(gameObject);
         }
     }
 }

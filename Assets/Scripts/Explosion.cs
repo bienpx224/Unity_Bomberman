@@ -21,7 +21,7 @@ public class Explosion : MonoBehaviour
     }
     
     public void DestroyAfter(float seconds){
-        Destroy(gameObject, seconds);
+        Lean.Pool.LeanPool.Despawn(gameObject, seconds);
     }
     
 }
