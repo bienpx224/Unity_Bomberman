@@ -23,6 +23,9 @@ public class BombController : MonoBehaviour
     [Header("Destructible")]
     public Tilemap destructibleTiles;
     public Destructible destructiblePrefab;
+    void Start(){
+        destructibleTiles = GameObject.FindWithTag("DestructiblesTilemap").GetComponent<Tilemap>();   
+    }
     private void OnEnable()
     {
         bombsRemaining = bombAmount;
