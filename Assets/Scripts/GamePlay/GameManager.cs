@@ -62,5 +62,8 @@ public class GameManager : Singleton<GameManager>
     void Reset(){
 
     }
+    public void BackToLobby(){
+        SceneManager.LoadScene("Lobby");
+    }
 
 }

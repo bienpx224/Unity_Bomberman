@@ -15,6 +15,9 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform _playerListParent;
     [SerializeField] private TextMeshProUGUI _statusTxt;
     [SerializeField] private GameObject _leaveRoomBtn;
+    [SerializeField] private GameObject _roomListWindow;
+    [SerializeField] private GameObject _playerListWindow;
+    [SerializeField] private Button _startGameBtn;
 
 
     private List<RoomItem> _roomList = new List<RoomItem>();
@@ -46,29 +49,33 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("OnJoinedLobby");
         _statusTxt.text = "In Lobby";
         _namePlayerTxt.text = PhotonNetwork.NickName;
+        SetupInLobbyUI();
     }
     public override void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom: " + PhotonNetwork.CurrentRoom.Name);
         _statusTxt.text = "In Room ` " + PhotonNetwork.CurrentRoom.Name + "`";
-        _leaveRoomBtn.SetActive(true);
+
         UpdatePlayerList();
+        SetupInRoomUI();
     }
     public override void OnLeftRoom()
     {
         Debug.Log("OnLeftRoom: ");
         _statusTxt.text = "In Lobby";
-        _leaveRoomBtn.SetActive(false);
         ClearPlayerList();
+        SetupInLobbyUI();
     }
 
     public override void OnPlayerEnteredRoom(Player player)
     {
         Debug.Log("OnPlayer Entered Room: " + player.NickName);
+        UpdatePlayerList();
     }
     public override void OnPlayerLeftRoom(Player player)
     {
         Debug.Log("OnPlayer Left Room: " + player.NickName);
+        UpdatePlayerList();
     }
 
     #endregion
@@ -76,7 +83,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     private void Initialize()
     {
         _namePlayerTxt.text = PlayerPrefs.GetString(Constants.NAME_PLAYER,"");
-        _statusTxt.text = "In Connecting";
+        _statusTxt.text = "In Connecting ... ";
         _leaveRoomBtn.SetActive(false);
     }
     private void UpdateRoomList(List<RoomInfo> newRoomList)
@@ -129,6 +136,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = namePlayer + "_" + Random.Range(0, 5000);
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.AutomaticallySyncScene = true;
+        SetupInLobbyUI();
     }
     public void JoinRoom(string name)
     {
@@ -141,8 +149,22 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.CreateRoom(_roomInput.text, new RoomOptions() { MaxPlayers = 4 }, null);
         }
     }
+    private void SetupInLobbyUI(){
+        _leaveRoomBtn.SetActive(false);
+        _startGameBtn.interactable = false;
+        _roomListWindow.SetActive(true);
+        _playerListWindow.SetActive(false);
+    }
+    private void SetupInRoomUI(){
+        _leaveRoomBtn.SetActive(true);
+        _startGameBtn.interactable = true;
+        _roomListWindow.SetActive(false);
+        _playerListWindow.SetActive(true);
+    }
     public void LeaveRoom()
     {
+        SetupInLobbyUI();
+        
         PhotonNetwork.LeaveRoom();
     }
 
