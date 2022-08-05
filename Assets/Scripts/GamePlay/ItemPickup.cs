@@ -24,7 +24,7 @@ public class ItemPickup : MonoBehaviour
             break;
         }
 
-        Lean.Pool.LeanPool.Despawn(gameObject);
+        Destroy(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other){
         /* Check if Player Tag collides with ItemPickup */
@@ -33,7 +33,7 @@ public class ItemPickup : MonoBehaviour
             OnItemPickup(other.gameObject);
         }
         if(other.gameObject.layer == LayerMask.NameToLayer("Explosion")){
-            Lean.Pool.LeanPool.Despawn(gameObject);
+            Destroy(gameObject);
         }
     }
 }

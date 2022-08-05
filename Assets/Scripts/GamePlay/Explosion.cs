@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Explosion : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Explosion : MonoBehaviour
     }
     
     public void DestroyAfter(float seconds){
-        Lean.Pool.LeanPool.Despawn(gameObject, seconds);
+        Destroy(gameObject, seconds);
     }
     
 }

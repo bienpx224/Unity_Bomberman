@@ -13,5 +13,9 @@ Game Bomberman by Unity using Tilemaps, Sprites, Animation, GameLogic, Pool, Sin
 - ĐÃ tạo Room rồi thì sẽ ko thể tạo room tiếp nữa, ta sẽ cần lắng nghe sự kiện OnJoinedLobby hoặc OnConnectToMaster để biết user đó đã đang ở ngoài và free, có thể tạo dc room.
 - Để ý commit "+ Add PUN2 - Lobby actions with Room" : Tại đây đã có 1 base project với các function từ scene Menu, điền tên, vào scene Lobby, kết nối Photon2, và thực hiện các actions cần thiết như Tạo room, Rời Room, List các Room, List Player in Room... Đọc code trong đó. đơn giản. 
 
+### In Game Play: 
+- Trong Prefabs Player, ta thêm component Photon View .
+- Trong hàm Start của GamePlay, ta thực hiện PhotonNetwork.Instantiate để tạo Player trên server. Như vậy thì cả phía mình và phía máy khác cũng sẽ tạo ra Player đó.
+- Để khi di chuyển ta chỉ di chuyển nhân vật của mình, trong PlayerController ta GetComponent<PhotonView> và thực hiện kiểm tra photonView.IsMine  thì mới cho di chuyển 
 
 

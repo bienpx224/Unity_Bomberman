@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Lean.Pool;
-
+using Photon.Pun;
 public class BombController : MonoBehaviour
 {
     [Header("Bomb")]
@@ -48,7 +48,7 @@ public class BombController : MonoBehaviour
 
         Debug.Log(position);
 
-        GameObject bomb = Lean.Pool.LeanPool.Spawn(bombPrefabs, position, Quaternion.identity);
+        GameObject bomb = PhotonNetwork.Instantiate(Constants.PREFABS_PATH + bombPrefabs.name, position, Quaternion.identity);
         bombsRemaining--;
 
         yield return new WaitForSeconds(bombFuseTime);
@@ -59,7 +59,7 @@ public class BombController : MonoBehaviour
         position.y = Mathf.Round(position.y);
 
         /* Make the explosion in the center, at position of the bomb */
-        Explosion explosion = Lean.Pool.LeanPool.Spawn(explosionPrefab, position, Quaternion.identity);
+        Explosion explosion = PhotonNetwork.Instantiate(Constants.PREFABS_PATH + explosionPrefab.gameObject.name, position, Quaternion.identity).GetComponent<Explosion>();
         explosion.SetActiveRenderer(explosion.start);
         explosion.DestroyAfter(explosionDuration);
 
@@ -69,7 +69,7 @@ public class BombController : MonoBehaviour
         Explode(position, Vector2.left, explosionRadius);
         Explode(position, Vector2.right, explosionRadius);
 
-        Lean.Pool.LeanPool.Despawn(bomb);
+        Destroy(bomb);
         bombsRemaining++;
     }
 
@@ -97,7 +97,9 @@ public class BombController : MonoBehaviour
             return;
         }
 
-        Explosion  explosion = Lean.Pool.LeanPool.Spawn(explosionPrefab, position,Quaternion.identity);
+        Debug.Log("Instantiate explosion effect");
+        Explosion  explosion = PhotonNetwork.Instantiate(Constants.PREFABS_PATH + explosionPrefab.gameObject.name, 
+                                                            position,Quaternion.identity).GetComponent<Explosion>();
         explosion.SetActiveRenderer(length > 1 ? explosion.middle : explosion.end);
         explosion.SetDirection(direction); /* Set Rotation for explosion rotate to direction : Cho vụ nổ quay đúng hướng */
         explosion.DestroyAfter(explosionDuration);
@@ -110,7 +112,7 @@ public class BombController : MonoBehaviour
         TileBase tile = destructibleTiles.GetTile(cell); // Get this tile at position
 
         if(tile != null){
-            Lean.Pool.LeanPool.Spawn(destructiblePrefab, position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Constants.PREFABS_PATH + destructiblePrefab.name, position, Quaternion.identity);
             destructibleTiles.SetTile(cell, null);   // Remove this tile from destructibleTiles. 
         }
         

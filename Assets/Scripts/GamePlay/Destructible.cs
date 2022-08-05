@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Destructible : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Destructible : MonoBehaviour
         if (spawnableItems.Length > 0 && Random.value < itemSpawnChance)
         {
             int randomIndex = Random.Range(0, spawnableItems.Length);
-            Lean.Pool.LeanPool.Spawn(spawnableItems[randomIndex], transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Constants.PREFABS_PATH + spawnableItems[randomIndex].name, transform.position, Quaternion.identity);
         }
     }
 

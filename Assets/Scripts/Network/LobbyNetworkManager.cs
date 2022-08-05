@@ -43,6 +43,7 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Disconnected");
+        SetupInLobbyUI();
     }
     public override void OnJoinedLobby()
     {
@@ -71,11 +72,13 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnPlayer Entered Room: " + player.NickName);
         UpdatePlayerList();
+        SetupInRoomUI();
     }
     public override void OnPlayerLeftRoom(Player player)
     {
         Debug.Log("OnPlayer Left Room: " + player.NickName);
         UpdatePlayerList();
+        SetupInRoomUI();
     }
 
     #endregion
@@ -157,9 +160,12 @@ public class LobbyNetworkManager : MonoBehaviourPunCallbacks
     }
     private void SetupInRoomUI(){
         _leaveRoomBtn.SetActive(true);
-        _startGameBtn.interactable = true;
         _roomListWindow.SetActive(false);
         _playerListWindow.SetActive(true);
+
+        if(PhotonNetwork.CurrentRoom.Players.Count >= 1 && PhotonNetwork.IsMasterClient){
+            _startGameBtn.interactable = true;
+        }
     }
     public void LeaveRoom()
     {

@@ -6,4 +6,5 @@ using UnityEngine.UI;
 public static class Constants
 {
     public static string NAME_PLAYER = "NAME_PLAYER";
+    public static string PREFABS_PATH = "Prefabs/";
 }
